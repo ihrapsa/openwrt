@@ -9,9 +9,9 @@ DEVICE_VARS += DLINK_ROM_ID DLINK_FAMILY_MEMBER DLINK_FIRMWARE_SIZE DLINK_IMAGE_
 define Build/elecom-header
 	cp $@ $(KDIR)/v_0.0.0.bin
 	( \
-		mkhash md5 $(KDIR)/v_0.0.0.bin && \
+		$(MKHASH) md5 $(KDIR)/v_0.0.0.bin && \
 		echo 458 \
-	) | mkhash md5 > $(KDIR)/v_0.0.0.md5
+	) | $(MKHASH) md5 > $(KDIR)/v_0.0.0.md5
 	$(STAGING_DIR_HOST)/bin/tar -c \
 		$(if $(SOURCE_DATE_EPOCH),--mtime=@$(SOURCE_DATE_EPOCH)) \
 		--owner=0 --group=0 -f $@ -C $(KDIR) v_0.0.0.bin v_0.0.0.md5
@@ -448,7 +448,7 @@ TARGET_DEVICES += head-weblink_hdrm200
 
 define Device/hiwifi_hc5661
   SOC := mt7620a
-  IMAGE_SIZE := 15872k
+  IMAGE_SIZE := 15808k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5661
   DEVICE_PACKAGES := kmod-sdhci-mt7620
@@ -458,7 +458,7 @@ TARGET_DEVICES += hiwifi_hc5661
 
 define Device/hiwifi_hc5761
   SOC := mt7620a
-  IMAGE_SIZE := 15872k
+  IMAGE_SIZE := 15808k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5761
   DEVICE_PACKAGES := kmod-mt76x0e kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 \
@@ -469,7 +469,7 @@ TARGET_DEVICES += hiwifi_hc5761
 
 define Device/hiwifi_hc5861
   SOC := mt7620a
-  IMAGE_SIZE := 15872k
+  IMAGE_SIZE := 15808k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5861
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 \
