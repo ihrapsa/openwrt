@@ -1,50 +1,26 @@
 From: George Brooke <figgyc@figgyc.uk>
 Subject: [PATCH] mtd: spi-nor: add support for Boya BY25Q128AS
 
-Adds support for the Boya Microelectronics BY25Q128AS 128 Mbit flash.
-I tested this on the Creality WB-01 embedded device which uses this, 
-although that was with OpenWrt which is still using 5.4 so I had to do 
-a bit of porting work. Don't see how that would make much of adifference though.
+Adds support for Boya Microelectronics (BoyaMicro) BY25Q128AS 128 MiB flash.
+Tested on Creality WB-01 embedded device which uses this chip.
 
 Signed-off-by: George Brooke <figgyc@figgyc.uk>
 ---
- drivers/mtd/spi-nor/Makefile |  1 +
- drivers/mtd/spi-nor/boya.c   | 23 +++++++++++++++++++++++
- drivers/mtd/spi-nor/core.c   |  1 +
- drivers/mtd/spi-nor/core.h   |  1 +
- 4 files changed, 26 insertions(+)
- create mode 100644 drivers/mtd/spi-nor/boya.c
+ drivers/mtd/spi-nor/spi-nor.c | 4 ++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/mtd/spi-nor/Makefile 
-b/drivers/mtd/spi-nor/Makefile
-index 653923896205..7d1551fbfbaa 100644
---- a/drivers/mtd/spi-nor/Makefile
-+++ b/drivers/mtd/spi-nor/Makefile
-@@ -2,6 +2,7 @@
-
- spi-nor-objs                   := core.o sfdp.o
- spi-nor-objs                   += atmel.o
-+spi-nor-objs                   += boya.o
- spi-nor-objs                   += catalyst.o
- spi-nor-objs                   += eon.o
- spi-nor-objs                   += esmt.o
-diff --git a/drivers/mtd/spi-nor/boya.c 
-b/drivers/mtd/spi-nor/boya.c
-new file mode 100644
-index 000000000000..014b0087048a
---- /dev/null
-+++ b/drivers/mtd/spi-nor/boya.c
-@@ -0,0 +1,23 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2005, Intec Automation Inc.
-+ * Copyright (C) 2014, Freescale Semiconductor, Inc.
-+ */
+--- a/drivers/mtd/spi-nor/spi-nor.c
++++ b/drivers/mtd/spi-nor/spi-nor.c
+@@ -2171,6 +2171,12 @@ static const struct flash_info spi_nor_i
+ 
+ 	{ "at45db081d", INFO(0x1f2500, 0, 64 * 1024, 16, SECT_4K) },
+ 
++	/* Boya */
++	{ "by25q128as", INFO(0x684018, 0, 64 * 1024, 256,
++			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
++			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
++	},
 +
-+#include <linux/mtd/spi-nor.h>
-+
-+#include "core.h"
-+
-+static const struct flash_info boya_parts[] = {
-+       /* Boya */
-+       { "by25q128as", INFO(0x684018, 0, 64 * 1024, 256,
+ 	/* EON -- en25xxx */
+ 	{ "en25f32",    INFO(0x1c3116, 0, 64 * 1024,   64, SECT_4K) },
+ 	{ "en25p32",    INFO(0x1c2016, 0, 64 * 1024,   64, 0) },
