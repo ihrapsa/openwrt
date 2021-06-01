@@ -82,4 +82,3 @@ index d631ee299de3..d5ed5217228b 100644
  extern const struct spi_nor_manufacturer spi_nor_eon;
  extern const struct spi_nor_manufacturer spi_nor_esmt;
 -- 
-2.30.0
