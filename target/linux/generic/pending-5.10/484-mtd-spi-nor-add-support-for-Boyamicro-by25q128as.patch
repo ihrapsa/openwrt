@@ -1,5 +1,6 @@
 From: George Brooke <figgyc@figgyc.uk>
-Subject: [PATCH] mtd: spi-nor: add support for Boya BY25Q128AS
+Date: Sun, 07 Feb 2021 12:30:34 +0000
+Subject: [PATCH] mtd: spi-nor: boya: add support for boya by25q128as
 
 Adds support for the Boya Microelectronics BY25Q128AS 128 Mbit flash.
 I tested this on the Creality WB-01 embedded device which uses this,
@@ -82,3 +83,4 @@ index d631ee299de3..d5ed5217228b 100644
  extern const struct spi_nor_manufacturer spi_nor_eon;
  extern const struct spi_nor_manufacturer spi_nor_esmt;
 -- 
+2.30.0
