@@ -105,7 +105,13 @@ define Device/creality_wb-01
   IMAGE/factory.bin := $$(sysupgrade_bin) | creality_wb-01-factory
   DEVICE_VENDOR := Creality
   DEVICE_MODEL := WB-01
-  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 kmod-fs-ext4 kmod-usb-storage kmod-usb-uhci kmod-usb-serial kmod-sound-core kmod-usb-serial-ch341 kmod-usb-serial-cp210x kmod-usb-serial-ftdi kmod-usb-serial-pl2303 kmod-video-core kmod-video-gspca-core kmod-video-gspca-zc3xx kmod-video-uvc kmod-video-videobuf2
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 kmod-fs-ext4 kmod-usb-storage \
+  		     kmod-usb-uhci kmod-usb-acm kmod-usb-serial kmod-usb-serial-ch341 \
+		     kmod-usb-serial-cp210x kmod-usb-serial-ftdi kmod-usb-serial-pl2303 \
+		     kmod-video-core kmod-video-gspca-core kmod-video-gspca-zc3xx \
+		     kmod-video-uvc kmod-video-videobuf2 kmod-sound-core \
+		     kmod-zram kmod-lib-lz4 kmod-lib-zstd \
+		     block-mount e2fsprogs swap-utils fdisk
 endef
 TARGET_DEVICES += creality_wb-01
 
